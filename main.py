@@ -1,7 +1,5 @@
-# Blinkande RGB-led Python-script för Raspberry PI Pico W
-# Version 1.0
-# Henrik Korslind
-# henrik@korslind.com
+# Flickering RGB-led Python-script for Raspberry PI Pico W
+# Author: Henrik Korslind (henrik@korslind.com)
 
 from machine import Pin, PWM
 import time
