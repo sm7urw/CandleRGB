@@ -16,7 +16,7 @@ BASE_GREEN = 0.5  # Grundintensitet för grönt ljus
 FLICKER_RED_MIN = 0.9  # Minsta intensitet för rött ljus under flimmer
 FLICKER_RED_MAX = 1.0  # Högsta intensitet för rött ljus under flimmer
 FLICKER_GREEN_MIN = 0.45  # Minsta intensitet för grönt ljus under flimmer
-FLICKER_GREEN_MAX = 0.55  # Högsta intensitet för grönt ljus under flimmer
+FLICKER_GREEN_MAX = 0.75  # Högsta intensitet för grönt ljus under flimmer
 FLICKER_DELAY_MIN = 0.05  # Minsta fördröjning mellan flimrande effekter i sekunder
 FLICKER_DELAY_MAX = 0.2  # Högsta fördröjning mellan flimrande effekter i sekunder
 
@@ -31,8 +31,8 @@ def init_pwm():
 
 # Sätt RGB-färger (utan blå)
 def set_rgb(red, green):
-    red_pin.duty_u16(int(red * 65535))  # Ställ in duty-cykel för rött ljus
-    green_pin.duty_u16(int(green * 65535))  # Ställ in duty-cykel för grönt ljus
+    red_pin.duty_u16(int(red * 35535))  # Ställ in duty-cykel för rött ljus
+    green_pin.duty_u16(int(green * 35535))  # Ställ in duty-cykel för grönt ljus
 
 # Mjuk fade-out när programmet avbryts
 def fade_out():
