@@ -15,9 +15,9 @@ FLICKER_DELAY_MIN = 0.04
 FLICKER_DELAY_MAX = 0.12
 
 # Ange pinnummer för RGB LED
-red_pin = PWM(Pin(0))
-green_pin = PWM(Pin(1))
-blue_pin = PWM(Pin(2))
+red_pin = PWM(Pin(2))
+green_pin = PWM(Pin(3))
+blue_pin = PWM(Pin(4))
 
 # Initiera PWM
 def init_pwm():
