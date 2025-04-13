@@ -2,6 +2,8 @@ from machine import Pin, PWM
 import time
 import urandom
 
+# Designad för ESP32-C3-Mini
+
 # Konstanter
 PWM_FREQ = 1000
 BASE_RED = 1.0
