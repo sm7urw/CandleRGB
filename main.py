@@ -10,15 +10,15 @@ freq(40000000)
 # Konstanter för PWM-frekvens och grundfärger
 PWM_FREQ = 1000  # PWM-frekvens i Hz
 BASE_RED = 1.0  # Grundintensitet för rött ljus
-BASE_GREEN = 0.5  # Grundintensitet för grönt ljus
+BASE_GREEN = 0.3  # Grundintensitet för grönt ljus
 
 # Konstanter för flimrande effekten
-FLICKER_RED_MIN = 0.9  # Minsta intensitet för rött ljus under flimmer
+FLICKER_RED_MIN = 0.5  # Minsta intensitet för rött ljus under flimmer
 FLICKER_RED_MAX = 1.0  # Högsta intensitet för rött ljus under flimmer
-FLICKER_GREEN_MIN = 0.45  # Minsta intensitet för grönt ljus under flimmer
-FLICKER_GREEN_MAX = 0.75  # Högsta intensitet för grönt ljus under flimmer
+FLICKER_GREEN_MIN = 0.5  # Minsta intensitet för grönt ljus under flimmer
+FLICKER_GREEN_MAX = 1.0  # Högsta intensitet för grönt ljus under flimmer
 FLICKER_DELAY_MIN = 0.05  # Minsta fördröjning mellan flimrande effekter i sekunder
-FLICKER_DELAY_MAX = 0.2  # Högsta fördröjning mellan flimrande effekter i sekunder
+FLICKER_DELAY_MAX = 0.4  # Högsta fördröjning mellan flimrande effekter i sekunder
 
 # Ange pinnummer för RGB LED
 red_pin = PWM(Pin(2))  # Pin för rött ljus
@@ -50,8 +50,25 @@ def flicker():
     # Justera färgen för flimrande effekt
     flicker_red = urandom.uniform(FLICKER_RED_MIN, FLICKER_RED_MAX)  # Slumpmässig intensitet för rött ljus
     flicker_green = urandom.uniform(FLICKER_GREEN_MIN, FLICKER_GREEN_MAX)  # Slumpmässig intensitet för grönt ljus
-    set_rgb(flicker_red, flicker_green)  # Ställ in slumpmässiga intensiteter
+
+    # Gradvis övergång till flimrande färg
+    for i in range(10):
+        red_val = BASE_RED + (flicker_red - BASE_RED) * i / 10
+        green_val = BASE_GREEN + (flicker_green - BASE_GREEN) * i / 10
+        set_rgb(red_val, green_val)
+        time.sleep(0.01)
+
     time.sleep(urandom.uniform(FLICKER_DELAY_MIN, FLICKER_DELAY_MAX))  # Vänta slumpmässig tid
+
+    # Gradvis övergång tillbaka till grundfärg
+    for i in range(10):
+        red_val = flicker_red + (BASE_RED - flicker_red) * i / 10
+        green_val = flicker_green + (BASE_GREEN - flicker_green) * i / 10
+        set_rgb(red_val, green_val)
+        time.sleep(0.01)
+
+    # Slumpmässig paus innan nästa flimmer
+    time.sleep(urandom.uniform(0, 1))
 
 # Kör programmet
 init_pwm()  # Initiera PWM
